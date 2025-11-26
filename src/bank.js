@@ -1,5 +1,6 @@
 class BankAccount {
   #balance = 0;
+
   static #totalNumberOfAccounts = 0;
 
   constructor(accountNumber, ownerName) {
@@ -16,10 +17,9 @@ class BankAccount {
   withdraw(amount) {
     if (amount > this.#balance) {
       return `Withdrawal failed. Insufficient funds.`;
-    } else {
-      this.#balance -= amount;
-      return `Withdrew $${amount}. New balance: ${this.#balance}`;
     }
+    this.#balance -= amount;
+    return `Withdrew $${amount}. New balance: ${this.#balance}`;
   }
 
   getBalance() {
@@ -41,6 +41,7 @@ class Bank {
   addAccount(account) {
     this.#accounts.push(account);
   }
+
   get accounts() {
     return [...this.#accounts];
   }
@@ -60,12 +61,12 @@ class Bank {
 
 // TEST YOUR CODE HERE
 // Create a Bank instance
-const myBank = new Bank("First National");
+const myBank = new Bank('First National');
 console.log(myBank); // Bank { name: "First National" }
 
 // Create BankAccount instances
-const account1 = new BankAccount("001", "Alice");
-const account2 = new BankAccount("002", "Bob");
+const account1 = new BankAccount('001', 'Alice');
+const account2 = new BankAccount('002', 'Bob');
 console.log(account1); // BankAccount { accountNumber: "001", ownerName: "Alice" }
 console.log(account2); // BankAccount { accountNumber: "002", ownerName: "Bob" }
 
@@ -73,7 +74,7 @@ console.log(account2); // BankAccount { accountNumber: "002", ownerName: "Bob" }
 myBank.addAccount(account1);
 myBank.addAccount(account2);
 console.log(myBank.accounts);
-/* 
+/*
 [
   BankAccount { accountNumber: "001", ownerName: "Alice" },
   BankAccount { accountNumber: "002", ownerName: "Bob" }
@@ -89,10 +90,10 @@ console.log(account2.deposit(250)); // Deposited $250. New Balance: 250
 console.log(myBank.getTotalBalance()); // 300
 
 // Find a specific account by accountNumber
-console.log(myBank.findAccount("001").ownerName); // "Alice"
+console.log(myBank.findAccount('001').ownerName); // "Alice"
 
 // Create a new account and check total accounts
-new BankAccount("003", "Charlie");
-console.log("Total accounts:", BankAccount.getTotalNumberOfAccounts()); // Should be 3
+new BankAccount('003', 'Charlie');
+console.log('Total accounts:', BankAccount.getTotalNumberOfAccounts()); // Should be 3
 // DO NOT REMOVE
 module.exports = { BankAccount, Bank };
